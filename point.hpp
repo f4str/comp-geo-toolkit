@@ -1,17 +1,17 @@
 #pragma once
 
 struct Point {
-	int x;
-	int y;
-	Point(int x, int y);
+	double x;
+	double y;
+	Point(double a, double b) : x(a), y(b) {};
 };
 
-int Area2(Point* a, Point* b, Point* c);
+double Area(Point* a, Point* b, Point* c);
 bool Left(Point* a, Point* b, Point* c);
 bool LeftOn(Point* a, Point* b, Point* c);
 bool Right(Point* a, Point* b, Point* c);
 bool RightOn(Point* a, Point* b, Point* c);
 bool Collinear(Point* a, Point* b, Point* c);
-bool IntersectProp(Point* a, Point* b, Point* c, Point* d);
+bool IntersectProper(Point* a, Point* b, Point* c, Point* d);
 bool Between(Point* a, Point* b, Point* c);
 bool Intersect(Point* a, Point* b, Point* c, Point* d);

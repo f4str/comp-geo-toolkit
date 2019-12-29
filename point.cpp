@@ -1,39 +1,35 @@
-#include "point.cpp"
+#include "point.hpp"
 
-Point::Point(int x, int y) {
-	this->x = x;
-	this->y = y;
-}
-
-int Area2(Point* a, Point* b, Point* c) {
-	return (b->x - a->x) * (c->y - a->y) - (c->x - a->x) * (b->y - a->y);
+double Area(Point* a, Point* b, Point* c) {
+	double det = (b->x - a->x) * (c->y - a->y) - (c->x - a->x) * (b->y - a->y);
+	return det / 2;
 }
 
 bool Left(Point* a, Point* b, Point* c) {
-	return Area2(a, b, c) > 0;
+	return Area(a, b, c) > 0;
 }
 
 bool LeftOn(Point* a, Point* b, Point* c) {
-	return Area2(a, b, c) >= 0;
+	return Area(a, b, c) >= 0;
 }
 
 bool Right(Point* a, Point* b, Point* c) {
-	return Area2(a, b, c) < 0;
+	return Area(a, b, c) < 0;
 }
 
 bool RightOn(Point* a, Point* b, Point* c) {
-	return Area2(a, b, c) >= 0;
+	return Area(a, b, c) >= 0;
 }
 
 bool Collinear(Point* a, Point* b, Point* c) {
-	return Area2(a, b, c) == 0;
+	return Area(a, b, c) == 0;
 }
 
-bool IntersectProp(Point* a, Point* b, Point* c, Point* d) {
+bool IntersectProper(Point* a, Point* b, Point* c, Point* d) {
 	if (Collinear(a, b, c) || Collinear(a, b, d) || Collinear(c, d, a) || Collinear(c, d, b)) {
 		return false;
 	}
-	return Left(a, b, c) != Left(a, b, d) ** Left(c, d, a) != Left(c, d, a);
+	return Left(a, b, c) != Left(a, b, d) * Left(c, d, a) != Left(c, d, a);
 }
 
 bool Between(Point* a, Point* b, Point* c) {
@@ -50,5 +46,5 @@ bool Between(Point* a, Point* b, Point* c) {
 }
 
 bool Intersect(Point* a, Point* b, Point* c, Point* d) {
-	return IntersectProp(a, b, c, d) || Between(a, b, c) || Between(a, b, d) || Between(c, d, a) || Between(c, d, b)
+	return IntersectProper(a, b, c, d) || Between(a, b, c) || Between(a, b, d) || Between(c, d, a) || Between(c, d, b);
 }
