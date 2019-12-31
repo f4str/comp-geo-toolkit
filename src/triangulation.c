@@ -2,7 +2,7 @@
 #include "point.h"
 #include "vertex.h"
 #include "polygon.h"
-#include "triangulations.h"
+#include "triangulation.h"
 
 void ear_clipping_triangulation(struct polygon* poly) {
 	struct vertex *v0, *v1, *v2, *v3, *v4;
@@ -40,8 +40,4 @@ void ear_clipping_triangulation(struct polygon* poly) {
 	polygon_free(poly_copy);
 	
 	// return list
-}
-
-void monotone_mountain_triangulation(struct polygon* poly) {
-	
 }
