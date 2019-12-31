@@ -1,5 +1,24 @@
 #include <stdbool.h>
+#include <stdlib.h>
 #include "point.h"
+
+struct point* point_new(float x, float y) {
+	struct point* p = malloc(sizeof(struct point));
+	p->x = x;
+	p->y = y;
+	return p;
+}
+
+void point_free(struct point* p) {
+	free(p);
+}
+
+struct point* point_copy(struct point* p) {
+	struct point* copy = malloc(sizeof(*p));
+	copy->x = p->x;
+	copy->y = p->y;
+	return copy;
+}
 
 float area(struct point* a, struct point* b, struct point* c) {
 	float det = (b->x - a->x) * (c->y - a->y) - (c->x - a->x) * (b->y - a->y);

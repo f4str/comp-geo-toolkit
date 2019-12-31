@@ -1,21 +1,59 @@
 #include <stdbool.h>
+#include <stdlib.h>
 #include "point.h"
+#include "vertex.h"
 #include "polygon.h"
 
-float polygon_area(struct vertex* polygon) {
-	double sum = 0;
-	struct vertex* a = polygon->next;
+struct polygon* polygon_new(struct vertex* v) {
+	struct polygon* poly = malloc(sizeof(struct polygon));
+	poly->vertices = v;
+	poly->vertices = 1;
+	return poly;
+}
+
+void polygon_free(struct polygon* poly) {
+	struct vertex* v = poly->start;
+	struct vertex* prev;
 	
 	do {
-		sum += area(polygon->p, a->p, a->next->p);
+		prev = v;
+		v = v->next;
+		vertex_free(prev);
+	} while (v != poly->start);
+	
+	free(poly);
+}
+
+struct polygon* polygon_copy(struct polygon* poly) {
+	struct polygon* copy = malloc(sizeof(*poly));
+	struct vertex *v1, *v2, *prev;
+	
+	copy->vertices = poly->vertices;
+	do {
+		v1 = vertex_copy(v2);
+		v1->prev = prev;
+		prev->next = v1;
+		prev = v1;
+		v2 = v2->next;
+	} while (v1 != poly->start);
+	
+	return copy;
+}
+
+float polygon_area(struct polygon* poly) {
+	double sum = 0;
+	struct vertex* a = poly->start->next;
+	
+	do {
+		sum += area(poly->start->p, a->p, a->next->p);
 		a = a->next;
-	} while (a->next != polygon);
+	} while (a->next != poly->start);
 	
 	return sum;
 }
 
-bool diagonal_ie(struct vertex* polygon, struct vertex* a, struct vertex* b) {
-	struct vertex* c = polygon;
+bool diagonal_ie(struct polygon* poly, struct vertex* a, struct vertex* b) {
+	struct vertex* c = poly->start;
 	struct vertex* d;
 	
 	do {
@@ -24,7 +62,7 @@ bool diagonal_ie(struct vertex* polygon, struct vertex* a, struct vertex* b) {
 			return false;
 		}
 		c = c->next;
-	} while (c != polygon);
+	} while (c != poly->start);
 	
 	return true;
 }
@@ -39,6 +77,18 @@ bool in_cone(struct vertex* a, struct vertex* b) {
 	return Right(a->p, b->p, a1->p) && Right(b->p, a->p, a0->p);
 }
 
-bool diagonal(struct vertex* polygon, struct vertex* a, struct vertex* b) {
-	return in_cone(a, b) && in_cone(b, a) && diagonal_ie(polygon, a, b);
+bool diagonal(struct polygon* poly, struct vertex* a, struct vertex* b) {
+	return in_cone(a, b) && in_cone(b, a) && diagonal_ie(poly, a, b);
+}
+
+void ear_init(struct polygon* poly) {
+	struct vertex* v1 = poly->start;
+	struct vertex *v0, *v2;
+	
+	do {
+		v2 = v1->next;
+		v0 = v1->prev;
+		v1->ear = diagonal(poly->start, v0, v2);
+		v1 = v1->next;
+	} while (v1 != poly->start);
 }

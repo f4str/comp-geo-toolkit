@@ -1,13 +1,15 @@
 #pragma once
 
-struct vertex {
-	struct point* p;
-	bool ear;
-	struct vertex* next;
-	struct vertex* prev;
+struct polygon {
+	struct vertex* start;
+	int vertices;
 };
 
-float polygon_area(struct vertex*);
-bool diagonal_ie(struct vertex*, struct vertex*, struct vertex*);
-bool in_cone(struct vertex*, struct vertex*);
-bool diagonal(struct vertex*, struct vertex*, struct vertex*);
+struct polygon* polygon_new(struct vertex* v);
+void polygon_free(struct polygon* poly);
+struct polygon* polygon_copy(struct polygon* poly);
+float polygon_area(struct polygon* poly);
+bool diagonal_ie(struct polygon* poly, struct vertex* a, struct vertex* b);
+bool in_cone(struct vertex* a, struct vertex* b);
+bool diagonal(struct polygon* poly, struct vertex* a, struct vertex* b);
+void ear_init(struct polygon* poly);
