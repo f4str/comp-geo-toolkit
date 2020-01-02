@@ -1,9 +1,9 @@
 #pragma once
 
 struct edge {
-	struct vertex* v1;
-	struct vertex* v2;
+	struct point* p1;
+	struct point* p2;
 };
 
-struct edge* edge_new(struct vertex* v1, struct vertex* v2);
+struct edge* edge_new(struct point* p1, struct point* p2);
 void edge_free(struct edge* e);

@@ -26,7 +26,7 @@ struct vector* ear_clipping_triangulation(struct polygon* poly) {
 				v0 = v2->prev;
 				
 				// add edge (v1, v3) to vector
-				e = edge_new(v1, v2);
+				e = edge_new(v1->p, v2->p);
 				vector_add(v, e);
 				
 				// Update diagonal endpoints

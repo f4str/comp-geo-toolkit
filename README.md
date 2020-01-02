@@ -34,10 +34,10 @@ Most of the data structures were implemented based on the C++ STL such as vector
 
 ### **Triangulations**
 
-* Ear Clipping - *O(n log n)*
+* Ear Clipping - *O(n<sup>2</sup>)*
 
 ### **Convex Hull**
 
 * Graham Scan - *O(n log n)*
 * Jarvis March - *O(nh)*
-
+* Divide-and-Conquer - *O(n log n)*
