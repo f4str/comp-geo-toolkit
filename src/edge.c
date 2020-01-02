@@ -1,7 +1,4 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include "point.h"
-#include "vertex.h"
 #include "edge.h"
 
 struct edge* edge_new(struct point* p1, struct point* p2) {

@@ -1,4 +1,6 @@
 #pragma once
+#include <stdbool.h>
+#include "vertex.h"
 
 struct polygon {
 	struct vertex* start;

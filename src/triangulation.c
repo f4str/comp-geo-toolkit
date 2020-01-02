@@ -1,9 +1,3 @@
-#include <stdbool.h>
-#include "point.h"
-#include "vertex.h"
-#include "polygon.h"
-#include "vector.h"
-#include "edge.h"
 #include "triangulation.h"
 
 struct vector* ear_clipping_triangulation(struct polygon* poly) {

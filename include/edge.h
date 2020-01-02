@@ -1,4 +1,5 @@
 #pragma once
+#include "point.h"
 
 struct edge {
 	struct point* p1;

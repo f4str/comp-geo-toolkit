@@ -1,7 +1,5 @@
-#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "point.h"
 #include "vertex.h"
 
 struct vertex* vertex_new(float x, float y) {

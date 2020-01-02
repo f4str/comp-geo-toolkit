@@ -1,7 +1,4 @@
-#include <stdbool.h>
 #include <stdlib.h>
-#include "point.h"
-#include "vertex.h"
 #include "polygon.h"
 
 struct polygon* polygon_new(struct vertex* v) {

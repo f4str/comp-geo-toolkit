@@ -1,4 +1,6 @@
 #pragma once
+#include <stdbool.h>
+#include "point.h"
 
 struct vertex {
 	struct point* p;

@@ -41,3 +41,4 @@ Most of the data structures were implemented based on the C++ STL such as vector
 * Graham Scan - *O(n log n)*
 * Jarvis March - *O(nh)*
 * Divide-and-Conquer - *O(n log n)*
+* Quickhull - *O(n<sup>2</sup>)*

@@ -1,4 +1,5 @@
 #pragma once
+#include <stdbool.h>
 
 static const int INITIAL_CAPACITY = 16;
 
@@ -21,5 +22,5 @@ int vector_index(const struct vector* v, void* e);
 void vector_add(struct vector* v, void* e);
 void vector_insert(struct vector* v, int index, void* e);
 void* vector_remove(struct vector* v, int index);
-int vector_erase(struct vector* v, void* e);
+bool vector_erase(struct vector* v, void* e);
 void vector_clear(struct vector* v);
